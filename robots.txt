@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lordisfet.github.io/bachelor-landing/sitemap.xml
