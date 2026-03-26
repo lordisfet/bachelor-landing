@@ -9,7 +9,7 @@
     <meta property="og:title" content="Система моніторингу мікроклімату птахоферми">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://lordisfet.github.io/bachelor-landing/">
-    <meta property="og:image" content="https://lordisfet.github.io/bachelor-landing/assets/images/og-preview.jpg">
+    <meta property="og:image" content="https://lordisfet.github.io/bachelor-landing/css/assets/images/og-preview.png">
     <meta property="og:description" content="IoT система моніторингу мікроклімату (T, H, CO2) для агресивних середовищ на базі ESP32.">
 
     <script type="application/ld+json">
@@ -29,44 +29,82 @@
     }
     </script>
 
-    <link rel="icon" href="assets/favicons/favicon.svg" type="image/svg+xml">
-    <link rel="icon" href="assets/favicons/favicon.png" sizes="32x32" type="image/png">
-    <link rel="apple-touch-icon" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" href="css/assets/favicons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="css/assets/favicons/favicon.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="css/assets/favicons/apple-touch-icon.png">
 </head>
 <body>
+    <body>
     <header role="banner">
         <nav aria-label="Головна навігація сайту">
-            </nav>
+            <img src="css/assets/images/ssu-logo.png" alt="Логотип Сумського державного університету" width="150" height="150">
+            <ul>
+                <li><a href="#about">Про проект</a></li>
+                <li><a href="#architecture">Архітектура</a></li>
+                <li><a href="#results">Результати</a></li>
+                <li><a href="#contacts">Контакти</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main role="main">
         <section id="hero">
-            <h1>Розробка відказостійкої системи моніторингу мікроклімату для птахоферми</h1>
+            <h1>Відказостійка система моніторингу мікроклімату птахоферми</h1>
+            <h2>Fault-Tolerant Microclimate Monitoring System for Poultry Farms</h2>
+            
+            <p><strong>Короткий опис:</strong> Розробка 3-рівневої IoT-системи на базі ESP32 та MESH-мережі для агресивних середовищ. Забезпечує безперервний збір телеметрії (T, H, CO2) та апаратну активацію тривоги (AVAS) при втраті зв'язку.</p>
+            
+            <p><strong>Ключові слова:</strong> IoT, ESP32, FreeRTOS, Spring Boot, MESH-мережа, PostgreSQL, LiFePO4, Fail-Safe.</p>
         </section>
 
         <section id="about">
-            <h2>Актуальність теми та Мета дослідження</h2>
-            </section>
+            <h2>Мета дослідження та Основні завдання</h2>
+            <p><strong>Мета дослідження:</strong> Розробити модульну, відказостійку інтелектуальну систему моніторингу параметрів мікроклімату у тваринницьких приміщеннях з високою концентрацією аміаку для підвищення ефективності виробництва та зменшення ризиків втрати поголів'я.</p>
+            
+            <h3>Основні завдання:</h3>
+            <ul>
+                <li>Синтез 3-рівневої архітектури: мережа вимірювальних вузлів (Nodes), локальний шлюз (LS) та головний сервер (Main Server) з Web UI.</li>
+                <li>Розробка самоорганізуючої бездротової MESH-мережі для обміну даними між вузлами (N1-N6) всередині ангара.</li>
+                <li>Імплементація локальної буферизації даних у Flash-пам'яті (до 14 днів) та на SD-карті Шлюзу для унеможливлення втрати телеметрії при розриві з'єднання.</li>
+                <li>Реалізація дворівневої логіки тривог (Warning / Critical) та сповіщень через інтеграцію з Telegram Bot API та SMS-шлюзом.</li>
+                <li>Забезпечення енергетичної автономності вузлів за допомогою джерел безперебійного живлення на базі LiFePO4 акумуляторів.</li>
+            </ul>
+        </section>
 
         <section id="architecture">
             <h2>Архітектура та Об'єкт дослідження</h2>
+            <p>Система жорстко розділяє функціональні (FR) та нефункціональні (NFR) вимоги. Апаратна логіка базується на промислових зондах з інтерфейсом RS485 та контролерах ESP32-WROOM/WROVER.</p>
             
             <h3>Контекстна взаємодія підсистем</h3>
-            <img src="assets/images/context-diagram.jpg" alt="Контекстна C4-діаграма: взаємодія системи моніторингу мікроклімату з Telegram API, SMS-шлюзом, персоналом (Worker/Admin/Owner) та апаратною системою тривоги AVAS" loading="lazy">
+            <p>Система має три типи користувачів з різним рівнем доступу (RBAC): Worker (отримує SMS/Telegram нотифікації), Owner (переглядає аналітику через Web UI) та Admin (конфігурує адаптивні пороги датчиків).</p>
+            <img src="css/assets/images/context-diagram.png" alt="Контекстна C4-діаграма: взаємодія системи моніторингу мікроклімату з Telegram API, SMS-шлюзом, персоналом та апаратною системою тривоги AVAS" loading="lazy">
 
             <h3>Топологія MESH-мережі пташника</h3>
-            <img src="assets/images/topology-diagram.jpg" alt="Схема локальної мережі: самоорганізуюча бездротова MESH-мережа вимірювальних вузлів N1-N6, з'єднаних з локальним сервером (LS), який має Ethernet-підключення до LAN та керує світлозвуковою сигналізацією AVAS" loading="lazy">
+            <p>Вимірювальні вузли N1-N6 утворюють бездротову мережу, що передає дані на локальний сервер (LS). LS через Ethernet-кабель з'єднаний з LAN-мережею. Окремим каналом керується світлозвукова сигналізація (AVAS).</p>
+            <img src="css/assets/images/topology-diagram.png" alt="Схема локальної мережі: самоорганізуюча бездротова MESH-мережа вимірювальних вузлів N1-N6, з'єднаних з локальним сервером (LS)" loading="lazy">
 
             <h3>Контейнерна архітектура програмного забезпечення</h3>
-            <img src="assets/images/container-diagram.jpg" alt="C4-діаграма контейнерів: Edge Gateway на базі C++ та FreeRTOS, Backend-сервер на Java Spring Boot, база даних PostgreSQL з TimescaleDB для метрик, та Web UI інтерфейс на React.js/Flutter" loading="lazy">
+            <p>Програмний стек розділено на контейнери: Edge-рівень працює на C++ (ESP-IDF, FreeRTOS). Backend-сервер побудовано на Java 21 / Spring Boot 3.x. Для зберігання часових рядів метрик використовується PostgreSQL з розширенням TimescaleDB. Клієнтський Web UI інтерфейс розроблено на React.js / Flutter.</p>
+            <img src="css/assets/images/container-diagram.png" alt="C4-діаграма контейнерів: Edge Gateway на базі C++, Backend-сервер на Java Spring Boot, база даних PostgreSQL та Web UI" loading="lazy">
         </section>
 
         <section id="results">
             <h2>Очікувані результати</h2>
-            </section>
+            <p>Проект забезпечить безперервний збір телеметрії з гарантованою 99.99% доступністю. Використання Fail-Safe реле (Normally Closed) для AVAS виключить ймовірність "тихих відмов", а шифрування каналів (TLS) захистить дані від підміни. Результатом є повністю автономний прототип, готовий до промислової експлуатації.</p>
+        </section>
+
+        <section id="contacts">
+            <h2>Контактна інформація</h2>
+            <p><strong>Студент-розробник:</strong> Савченко Максим Олександрович</p>
+            <p><strong>Email:</strong> maxasavajob@gmail.com</p>
+            <p><strong>Науковий керівник:</strong> Боровик В.О. </p>
+            <p><strong>Університет:</strong> Сумський державний університет </p>
+            <p><a href="https://github.com/lordisfet" target="_blank" rel="noopener">Посилання на профіль GitHub</a></p>
+        </section>
     </main>
 
     <footer role="contentinfo">
-        </footer>
+        <p>&copy; 2026 СумДУ. Всі права захищено.</p>
+    </footer>
 </body>
 </html>
