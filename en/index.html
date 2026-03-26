@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бакалаврська робота | IoT система моніторингу мікроклімату</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <meta property="og:title" content="Система моніторингу мікроклімату птахоферми">
     <meta property="og:type" content="article">
@@ -30,20 +30,20 @@
     }
     </script>
 
-    <link rel="icon" href="css/assets/favicons/favicon.svg" type="image/svg+xml">
-    <link rel="icon" href="css/assets/favicons/favicon.png" sizes="32x32" type="image/png">
-    <link rel="apple-touch-icon" href="css/assets/favicons/apple-touch-icon.png">
+    <link rel="icon" href="../css/assets/favicons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="../css/assets/favicons/favicon.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="../css/assets/favicons/apple-touch-icon.png">
 </head>
 <body>
     <header role="banner">
         <nav aria-label="Головна навігація сайту">
-            <img src="css/assets/images/ssu-logo.png" alt="Логотип Сумського державного університету" width="80" height="80">
+            <img src="../css/assets/images/ssu-logo.png" alt="Логотип Сумського державного університету" width="80" height="80">
             <ul>
                 <li><a href="#about">Про проект</a></li>
                 <li><a href="#architecture">Архітектура</a></li>
                 <li><a href="#results">Результати</a></li>
                 <li><a href="#contacts">Контакти</a></li>
-                <li><a href="en/">English</a></li>
+                <li><a href="../">Українська</a></li>
             </ul>
         </nav>
     </header>
@@ -78,15 +78,15 @@
             
             <h3>Контекстна взаємодія підсистем</h3>
             <p>Система має три типи користувачів з різним рівнем доступу (RBAC): Worker (отримує SMS/Telegram нотифікації), Owner (переглядає аналітику через Web UI) та Admin (конфігурує адаптивні пороги датчиків).</p>
-            <img src="css/assets/images/context-diagram.png" alt="Контекстна C4-діаграма: взаємодія системи моніторингу мікроклімату з Telegram API, SMS-шлюзом, персоналом та апаратною системою тривоги AVAS" loading="lazy">
+            <img src="../css/assets/images/context-diagram.png" alt="Контекстна C4-діаграма: взаємодія системи моніторингу мікроклімату з Telegram API, SMS-шлюзом, персоналом та апаратною системою тривоги AVAS" loading="lazy">
 
             <h3>Топологія MESH-мережі пташника</h3>
             <p>Вимірювальні вузли N1-N6 утворюють бездротову мережу, що передає дані на локальний сервер (LS). LS через Ethernet-кабель з'єднаний з LAN-мережею. Окремим каналом керується світлозвукова сигналізація (AVAS).</p>
-            <img src="css/assets/images/topology-diagram.png" alt="Схема локальної мережі: самоорганізуюча бездротова MESH-мережа вимірювальних вузлів N1-N6, з'єднаних з локальним сервером (LS)" loading="lazy">
+            <img src="../css/assets/images/topology-diagram.png" alt="Схема локальної мережі: самоорганізуюча бездротова MESH-мережа вимірювальних вузлів N1-N6, з'єднаних з локальним сервером (LS)" loading="lazy">
 
             <h3>Контейнерна архітектура програмного забезпечення</h3>
             <p>Програмний стек розділено на контейнери: Edge-рівень працює на C++ (ESP-IDF, FreeRTOS). Backend-сервер побудовано на Java 21 / Spring Boot 3.x. Для зберігання часових рядів метрик використовується PostgreSQL з розширенням TimescaleDB. Клієнтський Web UI інтерфейс розроблено на React.js / Flutter.</p>
-            <img src="css/assets/images/container-diagram.png" alt="C4-діаграма контейнерів: Edge Gateway на базі C++, Backend-сервер на Java Spring Boot, база даних PostgreSQL та Web UI" loading="lazy">
+            <img src="../css/assets/images/container-diagram.png" alt="C4-діаграма контейнерів: Edge Gateway на базі C++, Backend-сервер на Java Spring Boot, база даних PostgreSQL та Web UI" loading="lazy">
         </section>
 
         <section id="results">
